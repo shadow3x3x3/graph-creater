@@ -6,12 +6,12 @@ describe GraphCreater do
   describe "edge check" do
     it "edges out of range" do
       gc = GraphCreater.new(node: 2, edge: 3, dim: 4)
-      expect(gc.edge_out_of_range?).to eq(true)
+      expect(gc.edge_out_of_range?).to be true
     end
 
     it "edges not out of range" do
       gc = GraphCreater.new(node: 3, edge: 3, dim: 4)
-      expect(gc.edge_out_of_range?).to eq(false)
+      expect(gc.edge_out_of_range?).to be false
     end
   end
 
