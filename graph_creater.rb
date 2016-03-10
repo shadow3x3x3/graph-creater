@@ -36,8 +36,7 @@ class GraphCreater
   end
 
   def edge_out_of_range?
-    max_edges = @node * (@node-1) / 2
-    max_edges < @edge ? true : false
+    @node * (@node-1) / 2 < @edge ? true : false
   end
 
   def create_dim
