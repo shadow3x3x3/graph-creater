@@ -1,12 +1,19 @@
 class GraphCreater
-  def initialize(node: nil, edge: nil, dim: 4)
+  def initialize(node: nil, edge: nil, dim: 4, type: nil)
     @node   = node
     @edge   = edge
     @dim    = dim
-    @result = self.create
+    if type == nil
+      @type = "simple"
+    else
+      @type = type
+    end
+    any_edges  = self.create_any
+    @any_graph = add_dim(any_edges)
+    raise "Edges out of range" if edge_out_of_range?
   end
 
-  def create
+  def create_any
     result_array  = []
     created_edges = 0
     current_node  = 0
@@ -31,21 +38,30 @@ class GraphCreater
     result_array
   end
 
+
   def show_edges
-    p @result
+    p @any_graph
   end
 
   def edge_out_of_range?
     @node * (@node-1) / 2 < @edge ? true : false
   end
 
-  def create_dim
-    dim_array = []
-    @dim.times do
-      dim_array << random_num
+  def add_dim(edges_array)
+    final_graph = []
+    edges_array.each do |edge|
+      edge_with_dim = []
+      edge_with_dim << edge
+      edge_with_dim.flatten!
+      @dim.times do
+        edge_with_dim << random_num
+      end
+      final_graph << edge_with_dim
     end
-    dim_array
+
+    final_graph
   end
+
 
   def random_num
     ('0'..'9').to_a.shuffle[0..7].join.to_f / 1000000
