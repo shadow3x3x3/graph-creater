@@ -1,4 +1,8 @@
+require 'json'
+
 class GraphCreater
+  attr_reader :any_graph
+
   def initialize(node: nil, edge: nil, dim: 4, type: nil)
     @node   = node
     @edge   = edge
@@ -39,8 +43,9 @@ class GraphCreater
   end
 
 
-  def show_edges
-    p @any_graph
+  def graph_json
+    hash = Hash[ @any_graph.map {|d| ["path#{d[0]}_#{d[1]}".to_sym, d[2..d.size]]} ]
+    hash.to_json
   end
 
   def edge_out_of_range?
