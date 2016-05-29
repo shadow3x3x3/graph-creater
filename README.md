@@ -1,6 +1,6 @@
 # Graph-Generator
 
-Using Ruby for Generating Graph ([Graph theory](https://en.wikipedia.org/wiki/Graph_%28discrete_mathematics%29#Path_graph))
+Using Ruby for Generating Graph ([Graph theory](https://en.wikipedia.org/wiki/Graph_theory))
 
 This Generator not only generates the nodes and edges, but generates attribute(s) (Dimensions) on edges.
 
