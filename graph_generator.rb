@@ -1,25 +1,27 @@
-require 'json'
-
 # Create Graph
 class GraphGenerator
   attr_reader :any_graph
 
-  def initialize(type: nil, nodes_limit: nil, edges_limit: nil, dim: 4)
+  def initialize(nodes_limit: nil, edges_limit: nil, dim: 4)
     raise 'Edges out of range' if edge_out_of_range?(nodes_limit, edges_limit)
-    @type        = type.nil? ? 'simple' : type
     @nodes_limit = nodes_limit
     @edges_limit = edges_limit
     @dim         = dim
   end
 
   def random_graph
-    nodes = random_nodes
+    nodes = create_nodes
     add_dim(random_edges(nodes))
+  end
+
+  def complete_graph
+    nodes = create_nodes
+    add_dim(compelete_edges(nodes))
   end
 
   private
 
-  def random_nodes
+  def create_nodes
     [].tap do |nodes|
       0.upto(@nodes_limit - 1) { |node| nodes << node }
     end
@@ -28,6 +30,16 @@ class GraphGenerator
   def random_edges(nodes)
     permutation_nodes = nodes.permutation(2).to_a.shuffle
     permutation_nodes.pop(@edges_limit)
+  end
+
+  def compelete_edges(nodes)
+    final = []
+    permutation_nodes = nodes.permutation(2).to_a
+    permutation_nodes.each do |node|
+      next if final.include?([node[1], node[0]])
+      final << node
+    end
+    final
   end
 
   def add_dim(edges)
@@ -51,6 +63,6 @@ class GraphGenerator
   end
 end
 
-gc = GraphGenerator.new(type: nil, nodes_limit: 6, edges_limit: 6)
-result = gc.random_graph
+gc = GraphGenerator.new(nodes_limit: 6, edges_limit: 6)
+result = gc.complete_graph
 p result
