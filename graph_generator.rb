@@ -1,6 +1,9 @@
+require_relative './utils/file_io'
 # Create Graph
 class GraphGenerator
   attr_reader :any_graph
+
+  include FileIO
 
   def initialize(nodes_limit: nil, edges_limit: nil, dim: 4)
     raise 'Edges out of range' if edge_out_of_range?(nodes_limit, edges_limit)
@@ -65,4 +68,5 @@ end
 
 gc = GraphGenerator.new(nodes_limit: 6, edges_limit: 6)
 result = gc.complete_graph
-p result
+gc.write_to_txt(file_name: 'complete', data: result)
+gc.write_to_txt(data: result)

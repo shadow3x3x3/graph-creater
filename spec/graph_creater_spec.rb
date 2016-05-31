@@ -18,8 +18,7 @@ describe GraphCreater do
   describe "dim check" do
     it "should be 5 dim" do
       gc = GraphCreater.new(dim: 3)
-      dim_array = gc.create_dim
-      expect(dim_array.size).to eq(3)
+      expect(gc.show_edges[0].size).to eq(2 + 3)
     end
 
   end
