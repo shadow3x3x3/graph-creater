@@ -10,16 +10,19 @@ class GraphGenerator
     @nodes_limit = nodes_limit
     @edges_limit = edges_limit
     @dim         = dim
+    @nodes       = create_nodes
   end
 
   def random_graph
-    nodes = create_nodes
-    add_dim(random_edges(nodes))
+    add_dim(random_edges(@nodes))
   end
 
   def complete_graph
-    nodes = create_nodes
-    add_dim(compelete_edges(nodes))
+    add_dim(compelete_edges(@nodes))
+  end
+
+  def directed_graph
+    add_dim(directed_edges(@nodes))
   end
 
   private
@@ -31,16 +34,16 @@ class GraphGenerator
   end
 
   def random_edges(nodes)
-    permutation_nodes = nodes.permutation(2).to_a.shuffle
+    permutation_nodes = two_permutation_array(nodes).shuffle
     permutation_nodes.pop(@edges_limit)
   end
 
   def compelete_edges(nodes)
     final = []
-    permutation_nodes = nodes.permutation(2).to_a
-    permutation_nodes.each do |node|
-      next if final.include?([node[1], node[0]])
-      final << node
+    permutation_nodes = two_permutation_array(nodes)
+    permutation_nodes.each do |node_pair|
+      next if final.include?([node_pair[1], node_pair[0]])
+      final << node_pair
     end
     final
   end
@@ -55,6 +58,10 @@ class GraphGenerator
       final_graph << edge_with_dim
     end
     final_graph
+  end
+
+  def two_permutation_array(array)
+    array.permutation(2).to_a
   end
 
   def edge_out_of_range?(nodes_limit, edges_limit)
