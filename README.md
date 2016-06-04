@@ -27,6 +27,6 @@ If you set `edges_num`, it will be ignore.
 
 * [Connectivity](https://en.wikipedia.org/wiki/Connectivity_%28graph_theory%29) with nodes and edges
 ```ruby
-  gc = GraphGenerator.new(nodes_num: 6)
+  gc = GraphGenerator.new(nodes_num: 6, edges_num: 10)
   gc.connectivity_graph
 ```
