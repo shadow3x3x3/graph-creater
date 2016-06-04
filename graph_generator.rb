@@ -5,10 +5,12 @@ class GraphGenerator
 
   include FileIO
 
-  def initialize(nodes_limit: nil, edges_limit: nil, dim: 4)
-    raise 'Edges out of range' if edge_out_of_range?(nodes_limit, edges_limit)
-    @nodes_limit = nodes_limit
-    @edges_limit = edges_limit
+  def initialize(nodes_num: nil, edges_num: nil, dim: 4)
+    if edge_out_of_range?(nodes_num, edges_num)
+      raise 'This only can be simple Graph (too many edges)'
+    end
+    @nodes_num = nodes_num
+    @edges_num = edges_num
     @dim         = dim
     @nodes       = create_nodes
   end
@@ -21,21 +23,24 @@ class GraphGenerator
     add_dim(compelete_edges(@nodes))
   end
 
-  def directed_graph
-    add_dim(directed_edges(@nodes))
+  def connectivity_graph
+    unless can_be_connectivity?(@nodes_num, @edges_num)
+      raise "#{@edges_num} edges can't be connectivited in #{@nodes_num} nodes"
+    end
+    add_dim(connectivity_edges(@nodes))
   end
 
   private
 
   def create_nodes
     [].tap do |nodes|
-      0.upto(@nodes_limit - 1) { |node| nodes << node }
+      0.upto(@nodes_num - 1) { |node| nodes << node }
     end
   end
 
   def random_edges(nodes)
     permutation_nodes = two_permutation_array(nodes).shuffle
-    permutation_nodes.pop(@edges_limit)
+    permutation_nodes.pop(@edges_num)
   end
 
   def compelete_edges(nodes)
@@ -46,6 +51,25 @@ class GraphGenerator
       final << node_pair
     end
     final
+  end
+
+  def connectivity_edges(nodes)
+    nodes.shuffle!
+    part_graph = nodes.each.with_index.each_with_object([]) do |(n, i), f|
+      f << [n, nodes[i + 1]] unless i == nodes.size - 1
+      f
+    end
+    add_lacking_edges(part_graph)
+  end
+
+  def add_lacking_edges(part_graph)
+    permutation_nodes = two_permutation_array(@nodes)
+    until part_graph.size == @edges_num
+      r1, r2 = permutation_nodes.pop
+      next if part_graph.include?([r2, r1]) || part_graph.include?([r1, r2])
+      part_graph << [r1, r2]
+    end
+    part_graph
   end
 
   def add_dim(edges)
@@ -64,8 +88,12 @@ class GraphGenerator
     array.permutation(2).to_a
   end
 
-  def edge_out_of_range?(nodes_limit, edges_limit)
-    nodes_limit * (nodes_limit - 1) / 2 < edges_limit ? true : false
+  def edge_out_of_range?(nodes_num, edges_num)
+    nodes_num * (nodes_num - 1) / 2 < edges_num
+  end
+
+  def can_be_connectivity?(nodes_num, edges_num)
+    edges_num >= nodes_num - 1
   end
 
   def random_num(size)
@@ -73,7 +101,8 @@ class GraphGenerator
   end
 end
 
-gc = GraphGenerator.new(nodes_limit: 6, edges_limit: 6)
-result = gc.complete_graph
+gc = GraphGenerator.new(nodes_num: 6, edges_num: 10)
+result = gc.connectivity_graph
+p result
 gc.write_to_txt(file_name: 'complete', data: result)
 gc.write_to_txt(data: result)
