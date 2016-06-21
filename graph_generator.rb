@@ -11,8 +11,8 @@ class GraphGenerator
     end
     @nodes_num = nodes_num
     @edges_num = edges_num
-    @dim         = dim
-    @nodes       = create_nodes
+    @dim       = dim
+    @nodes     = create_nodes
   end
 
   def random_graph
