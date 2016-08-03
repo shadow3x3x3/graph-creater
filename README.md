@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/shadow3x3x3/graph-generator/badges/gpa.svg)](https://codeclimate.com/github/shadow3x3x3/graph-generator)
+
 # Graph-Generator
 
 Using Ruby for generating [Graph](https://en.wikipedia.org/wiki/Graph_theory) that is Simple Graph.
