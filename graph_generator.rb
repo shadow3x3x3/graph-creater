@@ -7,12 +7,12 @@ class GraphGenerator
 
   def initialize(nodes_num: nil, edges_num: nil, dim: 4)
     if edge_out_of_range?(nodes_num, edges_num)
-      raise 'This only can be simple Graph (too many edges)'
+      raise ArgumentError, 'This only can be simple Graph (too many edges)'
     end
     @nodes_num = nodes_num
     @edges_num = edges_num
-    @dim         = dim
-    @nodes       = create_nodes
+    @dim       = dim
+    @nodes     = create_nodes
   end
 
   def random_graph
@@ -25,7 +25,7 @@ class GraphGenerator
 
   def connectivity_graph
     unless can_be_connectivity?(@nodes_num, @edges_num)
-      raise "#{@edges_num} edges can't be connectivited in #{@nodes_num} nodes"
+      raise ArgumentError, "#{@edges_num} edges can't be connectivited in #{@nodes_num} nodes"
     end
     add_dim(connectivity_edges(@nodes))
   end
@@ -100,9 +100,3 @@ class GraphGenerator
     ('0'..'9').to_a.sample(size).join.to_f
   end
 end
-
-gc = GraphGenerator.new(nodes_num: 6, edges_num: 10)
-result = gc.connectivity_graph
-p result
-gc.write_to_txt(file_name: 'complete', data: result)
-gc.write_to_txt(data: result)
