@@ -1,8 +1,10 @@
+[![Code Climate](https://codeclimate.com/github/shadow3x3x3/graph-generator/badges/gpa.svg)](https://codeclimate.com/github/shadow3x3x3/graph-generator)
+
 # Graph-Generator
 
 Using Ruby for generating [Graph](https://en.wikipedia.org/wiki/Graph_theory) that is Simple Graph.
 
-This Generator not only generates the nodes and edges but generates attribute(s) (Dimensions) on every edges.
+This Generator not only generates nodes and edges but generates attribute(s) (Dimensions) on every edges.
 
 This Generator should make sure input nodes number and edges number before generating.
 
