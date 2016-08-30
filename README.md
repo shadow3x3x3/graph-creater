@@ -6,11 +6,11 @@ Using Ruby for generating [Graph](https://en.wikipedia.org/wiki/Graph_theory) th
 
 This Generator not only generates nodes and edges but generates attribute(s) (Dimensions) on every edges.
 
-This Generator should make sure input nodes number and edges number before generating.
+This Generator should make sure input node numbers and edge numbers before generating.
 
-Using `GraphGenerator.new(nodes_num: 6, edges_num: 10)` for initialize the Generator.
+Using `GraphGenerator.new(nodes_num: 6, edges_num: 10)` for initializing the Generator.
 
-Using `write_to_txt(file_name: 'complete', data: result)` can  output txt file with generating Graph. If file name is empty, and than default name is current time.
+Using `write_to_txt(file_name: 'complete', data: result)` can output txt file with generating Graph. If the file name field is empty, and than the default name is current time.
 
 ## Features
 * Random Graph with nodes and edges
