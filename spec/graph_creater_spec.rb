@@ -20,8 +20,5 @@ describe GraphCreater do
       gc = GraphCreater.new(dim: 3)
       expect(gc.show_edges[0].size).to eq(2 + 3)
     end
-
   end
-
-
 end
