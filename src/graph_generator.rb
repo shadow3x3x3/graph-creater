@@ -7,7 +7,7 @@ class GraphGenerator
   end
 
   def generator(factory, graph_type)
-    @factory    = factory
+    @factory = factory
 
     @nodes = create_nodes(@nodes_num)
     @edges = create_edges(graph_type.generator(@nodes_nums, @edges_num))
