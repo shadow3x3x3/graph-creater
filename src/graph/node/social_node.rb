@@ -1,0 +1,2 @@
+class SocialNode  
+end
