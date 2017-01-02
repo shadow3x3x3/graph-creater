@@ -10,4 +10,4 @@ require_relative 'src/type/complete_graph'
 
 graph_generator = GraphGenerator.new(node_num: 4, edge_num: 5) 
 
-graph_generator.generator(RoadGraphFactory.new, CompleteGraph.new)
+graph_generator.generate(RoadGraphFactory.new, CompleteGraph.new)

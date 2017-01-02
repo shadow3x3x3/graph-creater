@@ -1,5 +1,5 @@
 class ConnectivityGarph
-  def generator(nodes_num, edges_num)
+  def generate(nodes_num, edges_num)
     @edges_num = edges_num
     unless can_be_connectivity?(nodes_num, edges_num)
       raise ArgumentError, "#{@edges_num} edges can't be connectivited in #{@nodes_num} nodes"

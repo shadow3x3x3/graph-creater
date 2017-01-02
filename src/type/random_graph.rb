@@ -1,5 +1,5 @@
 class RandomGraph
-  def generator(nodes_num, edges_num)
+  def generate(nodes_num, edges_num)
     random_edges(nodes_num, edges_num)
   end
   

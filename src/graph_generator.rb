@@ -6,7 +6,7 @@ class GraphGenerator
     @dim       = dim
   end
 
-  def generator(factory, graph_type)
+  def generate(factory, graph_type)
     @factory = factory
 
     @nodes = create_nodes(@nodes_num)

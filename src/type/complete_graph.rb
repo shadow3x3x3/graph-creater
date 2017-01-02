@@ -1,5 +1,5 @@
 class CompleteGraph
-  def generator(nodes_num, edges_num)
+  def generate(nodes_num, edges_num)
     compelete_edges(nodes_num)  
   end
 
