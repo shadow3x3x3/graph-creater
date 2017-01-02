@@ -1,4 +1,6 @@
-class ConnectivityGarph
+require_relative 'general_graph'
+
+class ConnectivityGarph < GeneralGraph
   def generate(nodes_num, edges_num)
     @edges_num = edges_num
     unless can_be_connectivity?(nodes_num, edges_num)
@@ -31,9 +33,5 @@ class ConnectivityGarph
       part_graph << [r1, r2]
     end
     part_graph
-  end
-
-  def two_permutation_array(array)
-    array.permutation(2).to_a
   end
 end
