@@ -1,5 +1,5 @@
 class GraphGenerator
-  def create(factory, nodes_num: nil, edges_num: nil, dim: 4)
+  def initialize(nodes_num: nil, edges_num: nil, dim: 4)
     @factory   = factory
     @nodes_num = nodes_num
     @edges_num = edges_num
