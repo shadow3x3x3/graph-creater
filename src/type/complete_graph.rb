@@ -1,7 +1,7 @@
 require_relative 'general_graph'
 
 class CompleteGraph < GeneralGraph
-  def generate(nodes_num, edges_num)
+  def generate(nodes_num, edges_num = nil)
     compelete_edges(nodes_num)  
   end
 
